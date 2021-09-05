@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>CountryInformation</title>
 </head>
 <body>
-
+<!--wrapping container-->
+<div id="container">
+    <!--Button for searching Belgium info-->
+    <button id="belgiuminfo">Belgium</button>
+    <!--wrapping container for searchfield country's-->
+    <div id="" searchcontainer>
+        <input id="search" type="text">
+        <button id="submitbutton">search</button>
+    </div>
+    <!--wrapping container for returned info about the searched country-->
+    <div class="countrycontainer">
+        <img id="flag" src="" alt="">
+        <h2 id="country"></h2>
+        <p id="subarea"></p>
+        <p id="currencies"></p>
+        <p id="languages"></p>
+    </div>
+    <!--errors are logged here-->
+    <p id="errormessage"></p>
+</div>
+<script src="main.js"></script>
 </body>
 </html>
