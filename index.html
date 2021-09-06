@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>CountryInformation</title>
 </head>
 <body>
-
+<!--wrapping container-->
+<div id="container">
+    <!--wrapping container for page heading-->
+    <div id="titlecontainer">
+        <h1 id="title">Countryinformation</h1>
+    </div>
+    <!--Button for searching Belgium info-->
+    <button class="button" id="belgiuminfo">Belgium</button>
+    <!--wrapping container for searchfield country's-->
+    <div id="" searchcontainer>
+        <input id="search" placeholder="Type in countryname for more info" type="text">
+        <button class="button" id="submitbutton">search</button>
+    </div>
+    <!--wrapping container for returned info about the searched country-->
+    <div id="countrycontainer" class="hidden">
+        <img id="flag" src="" alt="">
+        <h2 id="country"></h2>
+        <p id="subarea"></p>
+        <p id="currencies"></p>
+        <p id="languages"></p>
+    </div>
+    <!--errors are logged here-->
+    <p id="errormessage" class="hidden"></p>
+</div>
+<script src="main.js"></script>
 </body>
 </html>
