@@ -6,9 +6,10 @@ const belgiumbutton = document.getElementById('belgiuminfo');
 let countryName;
 // textarea searchfield
 const searchfield = document.getElementById('search');
+const countryField = document.getElementById('countrycontainer');
 const searchbutton = document.getElementById('submitbutton');
 const errorMessageField = document.getElementById("errormessage");
-// an errrormessage is stored in this variable
+// errrormessage is stored in this variable
 let errorMessage = '';
 // below are the variables linked to the DOM-elements
 const flagElement = document.getElementById("flag");
@@ -18,6 +19,7 @@ const currencieElement = document.getElementById("currencies");
 const languageElement = document.getElementById("languages");
 
 //Eventlisteners for the Button that search info about Belgium
+// It sets the countryname to Belgium and calls the fetchData function
 belgiumbutton.addEventListener('click', () => {
     countryName = 'Belgium'
     fetchData();
@@ -33,7 +35,7 @@ searchfield.addEventListener('keypress', (e) => {
     }
 })
 
-//This function fetches the data of the country Belgium
+//This function fetches the data of the country Belgium or the country typed in the searchfield
 async function fetchData(countyName) {
     try {
         //////////opdracht 13 //////////
@@ -41,6 +43,11 @@ async function fetchData(countyName) {
         errorMessageField.textContent = '';
         //get the result from the api where ${countryName} is the country to fetch.
         const result = await axios.get(`https://restcountries.eu/rest/v2/name/${countryName}?fullText=true`);
+        //When data is fetched make the countrycontainer visible and hide the errrormessagefield by changing the classNames
+        if (result) {
+            countryField.className = 'show';
+            errorMessageField.className = 'hidden';
+        }
 
         //////////opdracht 1//////////
         //log all data of the searched country
@@ -81,12 +88,11 @@ async function fetchData(countyName) {
         //create a function that returns a string of all spoken languages
         const spokenLanguages = languages.map(language => {
             if (language == languages[0]) {
-                return `They speak ${language.name}`
+                return `They speak ${language.name}`;
             } else {
-                return `and ${language.name}`
+                return `and ${language.name}`;
             }
         })
-        //console.log(spokenLanguages.toString());
 
         //////////opdracht 7 //////////
         //log retrieved data in the dom
@@ -94,8 +100,8 @@ async function fetchData(countyName) {
         flagElement.src = flag;
         countryNameElement.textContent = name;
         subAreaElement.textContent = `${name} is situated in ${subregion}. It has a population of ${population} people`;
-        currencieElement.textContent = `The capital is ${capital} ${currency(currencies)}`
-        languageElement.textContent = `${spokenLanguages}`
+        currencieElement.textContent = `The capital is ${capital} ${currency(currencies)}`;
+        languageElement.textContent = `${spokenLanguages}`;
 
     } catch (e) {
         //////////opdracht 12 //////////
@@ -104,7 +110,11 @@ async function fetchData(countyName) {
         //set the errormessage in the variable
         errorMessage = e;
         //fill the HTML element with the errormessage
+        //and set the clasNames of the countrycontainer to hidden and the errormessage to show
+        errorMessageField.className = 'show';
+        countryField.className = 'hidden';
         errorMessageField.textContent = errorMessage;
+        document.getElementById("e").className = "show";
         //////////opdracht 10 //////////
         //remove all DOM-content in the DOM
         flagElement.src = '';
@@ -114,6 +124,7 @@ async function fetchData(countyName) {
         languageElement.textContent = '';
     }
 }
+
 // this function sets the value of the searchField to the variable countryName(country to fetch the data for)
 // and then call the fetchData function
 function fetchSearchData() {
